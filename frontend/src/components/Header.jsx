@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../App";
 
 const Header = () => {
-  const { setGenre, genre, handleSearch } = useContext(MovieContext);
+  const { setGenre, genre, handleSearch, setSearch } = useContext(MovieContext);
 
   const [markerPosition, setMarkerPosition] = useState(0);
   const [markerWidth, setMarkerWidth] = useState(0);
@@ -85,6 +85,7 @@ const Header = () => {
             type="text"
             className="search-bar"
             placeholder="Search for movies..."
+            onChange={(e) => setSearch(e.target.value)}
           />
           <button className="search-button" onClick={() => handleSearch()}>
             Search

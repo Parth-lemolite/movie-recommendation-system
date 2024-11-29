@@ -32,7 +32,7 @@ function App() {
   return (
     <Router>
       <MovieContext.Provider
-        value={{ search, setSearch, genre, setGenre, movies }}
+        value={{ search, setSearch, genre, setGenre, movies, handleSearch }}
       >
         <Routes>
           <Route path="/" element={<Home />}></Route>
