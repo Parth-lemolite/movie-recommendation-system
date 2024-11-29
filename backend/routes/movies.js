@@ -79,7 +79,7 @@
  */
 
 import express from "express";
-import Movies from "../model/Movies.js";
+import { Movies } from "../models/movies.js";
 
 const router = express.Router();
 
