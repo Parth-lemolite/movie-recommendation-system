@@ -2,7 +2,6 @@ import express from "express";
 
 const router = express.Router();
 
-// Movies data
 const movies = [
   { id: 1, title: "Inception", director: "Christopher Nolan", year: 2010 },
   {
@@ -19,7 +18,6 @@ const movies = [
   },
 ];
 
-// GET /movies - Get all movies
 router.get("/", (req, res) => {
   res.json(movies);
 });
