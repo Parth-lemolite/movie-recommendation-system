@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import Home from "./pages/Home";
+import AddMovie from "./pages/addMovie";
 
 export const MovieContext = createContext({});
 function App() {
@@ -37,7 +38,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
 
-          <Route path="/admin" element={<Home />}></Route>
+          <Route path="/admin" element={<AddMovie />}></Route>
         </Routes>
       </MovieContext.Provider>
     </Router>
