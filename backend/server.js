@@ -1,6 +1,7 @@
 import express from "express";
 import { specs, swaggerUi } from "./swagger.js";
 import moviesRouter from "./routes/movies.js";
+import "./dbConfig.js";
 
 const app = express();
 const port = 9000;
