@@ -49,10 +49,43 @@
  *               year:
  *                 type: integer
  *                 description: The release year of the movie.
+ *               genre:
+ *                 type: string
+ *                 description: The genre of the movie (e.g., Action, Drama, Comedy).
+ *               rating:
+ *                 type: number
+ *                 format: float
+ *                 description: The rating of the movie (0 to 10).
+ *               description:
+ *                 type: string
+ *                 description: A brief description of the movie.
+ *               languages:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                   description: The languages the movie is available in.
+ *               duration:
+ *                 type: string
+ *                 description: The duration of the movie (e.g., 120 minutes).
+ *               releaseDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The release date of the movie.
+ *               movieImage:
+ *                 type: string
+ *                 format: uri
+ *                 description: URL of the movie poster/image.
  *             required:
  *               - title
  *               - director
  *               - year
+ *               - genre
+ *               - rating
+ *               - description
+ *               - languages
+ *               - duration
+ *               - releaseDate
+ *               - movieImage
  *     responses:
  *       201:
  *         description: Movie added successfully.
@@ -66,38 +99,217 @@
  *                 movie:
  *                   type: object
  *                   properties:
- *                     id:
+ *                     _id:
+ *                       type: string
+ *                       description: The ID of the movie.
+ *                     title:
+ *                       type: string
+ *                       description: The title of the movie.
+ *                     director:
+ *                       type: string
+ *                       description: The director of the movie.
+ *                     year:
  *                       type: integer
+ *                       description: The release year of the movie.
+ *                     genre:
+ *                       type: string
+ *                       description: The genre of the movie.
+ *                     rating:
+ *                       type: number
+ *                       format: float
+ *                       description: The rating of the movie.
+ *                     description:
+ *                       type: string
+ *                       description: A brief description of the movie.
+ *                     languages:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                         description: The languages the movie is available in.
+ *                     duration:
+ *                       type: string
+ *                       description: The duration of the movie.
+ *                     releaseDate:
+ *                       type: string
+ *                       format: date
+ *                       description: The release date of the movie.
+ *                     movieImage:
+ *                       type: string
+ *                       format: uri
+ *                       description: URL of the movie poster/image.
+ *       400:
+ *         description: Invalid input. The provided data does not match the expected format or is missing required fields.
+ */
+/**
+ * @swagger
+ * /movies/{id}:
+ *   put:
+ *     summary: Update a movie
+ *     description: Updates the details of an existing movie.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the movie to update.
+ *         schema:
+ *           type: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The title of the movie.
+ *               director:
+ *                 type: string
+ *                 description: The director of the movie.
+ *               genre:
+ *                 type: string
+ *                 description: The genre of the movie.
+ *               rating:
+ *                 type: number
+ *                 description: The rating of the movie (between 0 and 10).
+ *               year:
+ *                 type: integer
+ *                 description: The release year of the movie.
+ *               description:
+ *                 type: string
+ *                 description: A brief description of the movie.
+ *               languages:
+ *                 type: array
+ *                 items:
+ *                   type: string
+ *                 description: A list of languages the movie is available in.
+ *               duration:
+ *                 type: string
+ *                 description: The duration of the movie.
+ *               releaseDate:
+ *                 type: string
+ *                 format: date
+ *                 description: The release date of the movie.
+ *               movieImage:
+ *                 type: string
+ *                 description: The URL of the movie's image.
+ *     responses:
+ *       200:
+ *         description: Movie updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 movie:
+ *                   type: object
+ *                   properties:
  *                     title:
  *                       type: string
  *                     director:
  *                       type: string
+ *                     genre:
+ *                       type: string
+ *                     rating:
+ *                       type: number
  *                     year:
  *                       type: integer
+ *                     description:
+ *                       type: string
+ *                     languages:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                     duration:
+ *                       type: string
+ *                     releaseDate:
+ *                       type: string
+ *                       format: date
+ *                     movieImage:
+ *                       type: string
  *       400:
- *         description: Invalid input.
+ *         description: Bad request. Missing required fields.
+ *       404:
+ *         description: Movie not found.
+ *       500:
+ *         description: Internal server error.
+ */
+/**
+ * @swagger
+ * /movies/{id}:
+ *   delete:
+ *     summary: Delete a movie
+ *     description: Deletes a movie based on its ID.
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: The ID of the movie to delete.
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Movie deleted successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                 movie:
+ *                   type: object
+ *                   properties:
+ *                     title:
+ *                       type: string
+ *                     director:
+ *                       type: string
+ *                     genre:
+ *                       type: string
+ *                     rating:
+ *                       type: number
+ *                     year:
+ *                       type: integer
+ *                     description:
+ *                       type: string
+ *                     languages:
+ *                       type: array
+ *                       items:
+ *                         type: string
+ *                     duration:
+ *                       type: string
+ *                     releaseDate:
+ *                       type: string
+ *                       format: date
+ *                     movieImage:
+ *                       type: string
+ *       404:
+ *         description: Movie not found.
+ *       500:
+ *         description: Internal server error.
  */
 
 import express from "express";
 import { Movies } from "../models/movies.js";
+import Joi from "joi";
 
 const router = express.Router();
 
-const movies = [
-  { id: 1, title: "Inception", director: "Christopher Nolan", year: 2010 },
-  {
-    id: 2,
-    title: "The Shawshank Redemption",
-    director: "Frank Darabont",
-    year: 1994,
-  },
-  {
-    id: 3,
-    title: "The Godfather",
-    director: "Francis Ford Coppola",
-    year: 1972,
-  },
-];
+const movieSchema = Joi.object({
+  title: Joi.string().required(),
+  director: Joi.string().required(),
+  genre: Joi.string().required(),
+  rating: Joi.number().min(0).max(10).required(),
+  // year: Joi.number().min(1900).max(new Date().getFullYear()).required(),
+  year: Joi.number().required(),
+  description: Joi.string().required(),
+  languages: Joi.array().items(Joi.string().required()).required(),
+  duration: Joi.string().required(),
+  releaseDate: Joi.date().required(),
+  movieImage: Joi.string().uri().required(),
+});
 
 // Movies route
 router.get("/movies", async (req, res) => {
@@ -108,13 +320,15 @@ router.get("/movies", async (req, res) => {
     const filter = {};
 
     if (search) {
-      filter.title = search;
-    }
-    if (genre !== "all") {
-      filter.genre = genre;
+      filter.title = { $regex: new RegExp(search, "i") };
     }
 
-    const movies = await Movies.find(filter);
+    if (genre && genre !== "all") {
+      filter.genre = genre;
+    }
+    console.log("180", filter);
+
+    const movies = await Movies.find(filter).sort({ rating: -1 });
     return res
       .status(200)
       .json({ message: "Movies fetched successfully", movies });
@@ -128,6 +342,10 @@ router.get("/movies", async (req, res) => {
 
 router.post("/movies", async (req, res) => {
   try {
+    const { error } = movieSchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
     const {
       title,
       director,
@@ -141,20 +359,6 @@ router.post("/movies", async (req, res) => {
       movieImage,
     } = req.body;
 
-    if (
-      !title ||
-      !director ||
-      !genre ||
-      !rating ||
-      !year ||
-      !description ||
-      !languages ||
-      !duration ||
-      !releaseDate ||
-      !movieImage
-    ) {
-      return res.status(400).json({ message: "Bad request" });
-    }
     const newMovie = new Movies({
       title,
       director,
