@@ -24,7 +24,7 @@ const MovieSchema = new mongoose.Schema(
     },
 
     duration: {
-      type: String,
+      type: Number,
       required: true,
     },
 

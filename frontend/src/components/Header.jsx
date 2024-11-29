@@ -10,11 +10,17 @@ const Header = () => {
   useEffect(() => {
     const genreElements = document.querySelectorAll("#menu-box li");
 
-    const selectedIndex = genre
-      ? ["all", "comedy", "horror", "romance", "thriller", "drama"].indexOf(
-          genre
-        )
-      : 0;
+    // Ensure valid genres and find the selected genre's index
+    const validGenres = [
+      "all",
+      "Comedy",
+      "Horror",
+      "Romance",
+      "Thriller",
+      "Drama",
+    ];
+    const selectedIndex =
+      validGenres.indexOf(genre) !== -1 ? validGenres.indexOf(genre) : 0;
 
     const selectedElement = genreElements[selectedIndex];
 
@@ -24,7 +30,7 @@ const Header = () => {
       setMarkerPosition(leftPosition);
       setMarkerWidth(itemWidth);
     }
-  }, [genre]);
+  }, [genre]); // Runs when the genre state changes
 
   return (
     <header>
@@ -66,19 +72,19 @@ const Header = () => {
           </li>
           <li
             onClick={() => setGenre("Thriller")}
-            className={genre === "thriller" ? "selected" : ""}
+            className={genre === "Thriller" ? "selected" : ""}
           >
             Thriller
           </li>
           <li
             onClick={() => setGenre("Drama")}
-            className={genre === "drama" ? "selected" : ""}
+            className={genre === "Drama" ? "selected" : ""}
           >
             Drama
           </li>
         </ul>
       </nav>
-      <h2 className="movie-name">Welcome To MernFlix MoviesHub</h2>
+      <h2 className="movie-name">Welcome To MernFlix </h2>
       <div className="popular-movie-slider">
         <div className="search-container">
           <input
