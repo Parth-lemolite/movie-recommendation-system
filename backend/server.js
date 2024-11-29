@@ -2,6 +2,7 @@ import express from "express";
 import { specs, swaggerUi } from "./swagger.js";
 import moviesRouter from "./routes/movies.js";
 import "./dbConfig.js";
+import movieRouter from "./routes/movies.js";
 
 const app = express();
 const port = 9000;
@@ -10,7 +11,7 @@ app.use(express.json());
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-app.use("/movies", moviesRouter);
+app.use("/", movieRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello, Swagger!");
