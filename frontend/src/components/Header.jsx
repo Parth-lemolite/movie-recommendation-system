@@ -21,13 +21,13 @@ const Header = () => {
       </nav>
       <h2 className="movie-name">Welcome To MernFlix MoviesHub</h2>
       <div className="popular-movie-slider">
-        <div class="search-container">
+        <div className="search-container">
           <input
             type="text"
-            class="search-bar"
+            className="search-bar"
             placeholder="Search for movies..."
           />
-          <button class="search-button">Search</button>
+          <button className="search-button">Search</button>
         </div>
       </div>
     </header>
