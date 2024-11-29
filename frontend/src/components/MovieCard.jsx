@@ -6,7 +6,6 @@ const MovieCard = (movie) => {
     <div className="card">
       <img src={movie.movieImage} alt={movie.title} />
       <div className="card-content">
-        {console.log(movie, ">>>>>>>>>>>>10")}
         <p className="movie-name">{movie.title}</p>
         <p className="director">Directed by: {movie.director}</p>
         <p className="description">{movie.description}</p>
